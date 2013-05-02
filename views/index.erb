@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <title>Calentador Electrico</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+
+      $(document).ready(function(){
+          $('#btn_submit').click(function(){
+            var temp_inicial_agua = $('#temp_inicial_agua').val();
+            var tiempo_calentamiento = $('#tiempo_calentamiento').val();
+            var valor_resistencia = $('#valor_resistencia').val();
+            drawChart(temp_inicial_agua, tiempo_calentamiento, valor_resistencia);
+          });
+      });
+
+      function drawChart(temp, tiempo, resistencia) {
+        $.ajax({
+          url: '/graficar?temp=' + temp + '&tiempo=' + tiempo + '&resistencia=' + resistencia,
+          success: function(data) {
+            var data = google.visualization.arrayToDataTable(data);
+
+            var options = {
+              title: 'Calentador Electrico'
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+          },
+          dataType: 'json'
+        });
+      }
+  </script>
+</head>
+<body>
+  <input type="text" id="temp_inicial_agua" placeholder="Temp Inicial Agua" /><br />
+  <input type="text" id="tiempo_calentamiento" placeholder="Tiempo Calentamiento (seg)" /><br />
+  <input type="text" id="valor_resistencia" placeholder="Valor Resistencia" />
+  <input type="submit" value="Graficar" id="btn_submit"/>
+
+  <div id="chart_div" style="width: 900px; height: 500px;"></div>
+  <div id="table_div" style="width: 900px; height: 500px;"></div>
+</body>
+</html>
