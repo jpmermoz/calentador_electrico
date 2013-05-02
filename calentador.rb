@@ -6,16 +6,16 @@ get '/' do
 end
 
 get '/graficar' do
-  @temp_inicial = BigDecimal.new(params[:temp])
+  @temp_inicial = Random.new.rand(0..30)
   @tiempo_calentamiento = BigDecimal.new(params[:tiempo])
-  @resistencia = BigDecimal.new(params[:resistencia])
+  @resistencia = Random.new.rand((48.4*0.8)..(48.4*1.2))
   @calor_esp_agua = 1000
   @masa_agua = 1
-  @voltaje = 220
+  @voltaje = Random.new.rand((220*0.9)..(220*1.1))
   @coef_condicion_termica = 0.04
   @sup_interfaz = 0.06
-  @esp_interfaz = 0.001
-  @temp_externa = 20
+  @esp_interfaz = Random.new.rand((0.001 * 0.8)..(0.001 * 1.2))
+  @temp_externa = Random.new.rand(-20..30)
 
   @corriente = @voltaje / @resistencia
   @watts = @voltaje ** 2 / @resistencia
@@ -23,7 +23,6 @@ get '/graficar' do
   @joules = @calor_entregado / (@masa_agua * @calor_esp_agua)
 
   @temperaturas = []
-  @temperaturas << ["Segundos", "Temperatura"]
   @temp_final = @temp_inicial
   @segundo = 1
   
@@ -42,6 +41,7 @@ get '/graficar' do
     @temperaturas << [@segundo, @temp_final]
     @temp_inicial = @temp_final
     @segundo += 1
+    @temp_externa += Random.new.rand(-0.03..0.07)
   end
 
   "#{@temperaturas}"

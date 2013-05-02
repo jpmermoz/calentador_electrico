@@ -5,27 +5,36 @@
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
+      var datos = [];
+      datos.push(["Segundos", "Temperatura"]);
 
       $(document).ready(function(){
           $('#btn_submit').click(function(){
-            var temp_inicial_agua = $('#temp_inicial_agua').val();
             var tiempo_calentamiento = $('#tiempo_calentamiento').val();
-            var valor_resistencia = $('#valor_resistencia').val();
-            drawChart(temp_inicial_agua, tiempo_calentamiento, valor_resistencia);
+            
+            for (var i = 0; i < 10; i++){
+              drawChart(tiempo_calentamiento);
+            }
           });
       });
 
-      function drawChart(temp, tiempo, resistencia) {
+      function drawChart(tiempo) {
         $.ajax({
-          url: '/graficar?temp=' + temp + '&tiempo=' + tiempo + '&resistencia=' + resistencia,
+          url: '/graficar?tiempo=' + tiempo,
+          async: false,
           success: function(data) {
-            var data = google.visualization.arrayToDataTable(data);
 
+            for (var i = 0; i < data.length; i++){
+              datos.push(data[i]);
+            }
+
+            var data = google.visualization.arrayToDataTable(datos);
+            
             var options = {
               title: 'Calentador Electrico'
             };
-
             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
             chart.draw(data, options);
           },
           dataType: 'json'
@@ -34,12 +43,9 @@
   </script>
 </head>
 <body>
-  <input type="text" id="temp_inicial_agua" placeholder="Temp Inicial Agua" /><br />
   <input type="text" id="tiempo_calentamiento" placeholder="Tiempo Calentamiento (seg)" /><br />
-  <input type="text" id="valor_resistencia" placeholder="Valor Resistencia" />
   <input type="submit" value="Graficar" id="btn_submit"/>
 
   <div id="chart_div" style="width: 900px; height: 500px;"></div>
-  <div id="table_div" style="width: 900px; height: 500px;"></div>
 </body>
 </html>
