@@ -6,10 +6,12 @@
   <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       var datos = [];
-      datos.push(["Segundos", "Temperatura"]);
 
       $(document).ready(function(){
           $('#btn_submit').click(function(){
+            datos = [];
+            datos.push(["Segundos", "Temperatura"]);
+
             var tiempo_calentamiento = $('#tiempo_calentamiento').val();
             
             for (var i = 0; i < 10; i++){
