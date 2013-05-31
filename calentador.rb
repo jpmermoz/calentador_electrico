@@ -6,13 +6,21 @@ get '/' do
 end
 
 get '/graficar' do
+  @material = params[:id]
+
+  case @material
+  when 'cubo_telgopor'
+    @coef_condicion_termica = 0.06
+  when 'cubo_polietileno'
+    @coef_condicion_termica = 0.023
+  end
+
   @temp_inicial = Random.new.rand(0..30)
   @tiempo_calentamiento = BigDecimal.new(params[:tiempo])
   @resistencia = Random.new.rand((48.4*0.8)..(48.4*1.2))
   @calor_esp_agua = 1000
   @masa_agua = 1
   @voltaje = Random.new.rand((220*0.9)..(220*1.1))
-  @coef_condicion_termica = 0.04
   @sup_interfaz = 0.06
   @esp_interfaz = Random.new.rand((0.001 * 0.8)..(0.001 * 1.2))
   @temp_externa = Random.new.rand(-20..30)
@@ -26,7 +34,7 @@ get '/graficar' do
   @temp_final = @temp_inicial
   @segundo = 1
   
-  while @temp_final <= 300
+  while @temp_final <= 1500
 
     #No calentar mas del tiempo ingresado
     if @segundo == @tiempo_calentamiento
