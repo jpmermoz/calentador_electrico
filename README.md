@@ -1,26 +1,26 @@
 calentador_electrico
 ====================
 
-Calentador Eléctrico realizado en Ruby on Rails
-Materia: Modelos y Simulación
-Carrera: Ingeniería en Informática
-Universidad de Mendoza - Año 2013
-Alumno: Juan Pedro Mermoz
+Calentador Eléctrico realizado en Ruby on Rails <br />
+Materia: Modelos y Simulación <br />
+Carrera: Ingeniería en Informática <br />
+Universidad de Mendoza - Año 2013 <br />
+Alumno: Juan Pedro Mermoz <br />
 
 Resumen
 --------------------
-El programa simula el calentamiento de agua de un calentador eléctrico, utilizando un modelo estocástico.
+El programa simula el calentamiento de agua de un calentador eléctrico, utilizando un modelo estocástico. <br />
 Se pueden verificar los resultados para cada tipo de recipiente.
 
-Los recipientes son:
--Cubo de telgopor
--Cubo de polietileno
--Cilindro de telgopor
--Cilindro de polietileno
+Los recipientes son: <br />
+-Cubo de telgopor <br />
+-Cubo de polietileno <br />
+-Cilindro de telgopor <br />
+-Cilindro de polietileno <br />
 
 Instrucciones
 --------------------
-1) Instalar sinatra: sudo gem install sinatra
-2) Ejecutar: ruby calentador.rb
-3) Abrir navegador web e ingresar a: http://localhost:4567
+1) Instalar sinatra: sudo gem install sinatra <br />
+2) Ejecutar: ruby calentador.rb <br />
+3) Abrir navegador web e ingresar a: http://localhost:4567 <br />
 4) Ingresar tiempo de calentamiento y cantidad de curvas.
