@@ -12,7 +12,9 @@
             var tiempo_calentamiento = $('#tiempo_calentamiento').val();
             var cantidad_curvas = $("#cantidad_curvas").val();
             drawChart(tiempo_calentamiento, 'cubo_telgopor', cantidad_curvas);  
-            drawChart(tiempo_calentamiento, 'cubo_polietileno', cantidad_curvas);  
+            drawChart(tiempo_calentamiento, 'cubo_polietileno', cantidad_curvas);
+            drawChart(tiempo_calentamiento, 'cilindro_telgopor', cantidad_curvas);  
+            drawChart(tiempo_calentamiento, 'cilindro_polietileno', cantidad_curvas);  
           });
       });
 
@@ -60,5 +62,7 @@
 
   <div id="cubo_telgopor" style="width: 900px; height: 500px;"></div>
   <div id="cubo_polietileno" style="width: 900px; height: 500px;"></div>
+  <div id="cilindro_telgopor" style="width: 900px; height: 500px;"></div>
+  <div id="cilindro_polietileno" style="width: 900px; height: 500px;"></div>
 </body>
 </html>

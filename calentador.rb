@@ -11,8 +11,16 @@ get '/graficar' do
   case @material
   when 'cubo_telgopor'
     @coef_condicion_termica = 0.06
+    @sup_interfaz = 0.06
   when 'cubo_polietileno'
     @coef_condicion_termica = 0.023
+    @sup_interfaz = 0.06
+  when 'cilindro_telgopor'
+    @coef_condicion_termica = 0.06
+    @sup_interfaz = 0.055
+  when 'cilindro_polietileno'
+    @coef_condicion_termica = 0.023
+    @sup_interfaz = 0.055
   end
 
   @cantidad_curvas = BigDecimal.new(params[:curvas])
@@ -27,7 +35,6 @@ get '/graficar' do
     @calor_esp_agua = 1000
     @masa_agua = 1
     @voltaje = Random.new.rand((220*0.9)..(220*1.1))
-    @sup_interfaz = 0.06
     @esp_interfaz = Random.new.rand((0.001 * 0.8)..(0.001 * 1.2))
     @temp_externa = Random.new.rand(-20..30)
 
