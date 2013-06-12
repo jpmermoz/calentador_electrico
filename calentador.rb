@@ -15,7 +15,7 @@ get '/graficar' do
     @coef_condicion_termica = 0.023
   end
 
-  @cantidad_curvas = 3
+  @cantidad_curvas = BigDecimal.new(params[:curvas])
   @temperaturas = []
 
   for curva in 0..@cantidad_curvas

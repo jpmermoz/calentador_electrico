@@ -10,20 +10,34 @@
       $(document).ready(function(){
           $('#btn_submit').click(function(){
             var tiempo_calentamiento = $('#tiempo_calentamiento').val();
-            drawChart(tiempo_calentamiento, 'cubo_telgopor');  
+            var cantidad_curvas = $("#cantidad_curvas").val();
+            drawChart(tiempo_calentamiento, 'cubo_telgopor', cantidad_curvas);  
+            drawChart(tiempo_calentamiento, 'cubo_polietileno', cantidad_curvas);  
           });
       });
 
-      function drawChart(tiempo, id) {                
+      function drawChart(tiempo, id, cantidad_curvas) {                
         datos = [];
-        datos.push(["Segundos", "Temperatura1", "Temperatura2", "Temperatura3"]);
+        var header = ["Segundos"];
+        
+        for (var i = 1; i <= cantidad_curvas; i++){
+          header.push("Temperatura_" + i);
+        }
+
+        datos.push(header);
 
         $.ajax({
-          url: '/graficar?tiempo=' + tiempo + '&id=' + id,
+          url: '/graficar?tiempo=' + tiempo + '&id=' + id + '&curvas=' + cantidad_curvas,
           async: false,
           success: function(curvas) {
+            var valores = [];
             for (var i = 0; i < curvas[0].length; i++){
-              datos.push([i, curvas[0][i][1], curvas[1][i][1], curvas[2][i][1]]);  
+              valores.push(i);
+              for (var j = 0; j < cantidad_curvas; j++){
+                valores.push(curvas[j][i][1]); 
+              }
+              datos.push(valores);
+              valores = [];
             }
           },
           dataType: 'json'
@@ -41,7 +55,8 @@
 </head>
 <body>
   <input type="text" id="tiempo_calentamiento" placeholder="Tiempo Calentamiento (seg)" /><br />
-  <input type="submit" value="Graficar" id="btn_submit"/>
+  <input type="text" id="cantidad_curvas" placeholder="Cantidad de curvas" /><br />
+  <input type="submit" value="Graficar" id="btn_submit"/><br />
 
   <div id="cubo_telgopor" style="width: 900px; height: 500px;"></div>
   <div id="cubo_polietileno" style="width: 900px; height: 500px;"></div>
