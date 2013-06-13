@@ -12,13 +12,13 @@ get '/graficar' do
   when 'cubo_telgopor'
     @coef_condicion_termica = 0.06
     @sup_interfaz = 0.06
-  when 'cubo_polietileno'
+  when 'cubo_poliuretano'
     @coef_condicion_termica = 0.023
     @sup_interfaz = 0.06
   when 'cilindro_telgopor'
     @coef_condicion_termica = 0.06
     @sup_interfaz = 0.055
-  when 'cilindro_polietileno'
+  when 'cilindro_poliuretano'
     @coef_condicion_termica = 0.023
     @sup_interfaz = 0.055
   end
